@@ -114,22 +114,19 @@
     
           <div class="col-md-3 text-end">
             {% if user.is_authenticated %}
-                                <div class="" >
-                                   
-                                    <a href="{% url 'logout' %}"><button type="button" class="btn btn-primary">Logout</button></a>
-                                </div>
-                            {% else %}
-                                <div class="">
-                                  
-                                    <a href="{url 'login'}"><button type="button" class="btn btn-outline-primary me-2">Login</button></a>
-                                    <a href="{% url 'register' %}"><button type="button" class="btn btn-primary">Sign-up</button></a>
-                                </div>
-                            {% endif %}
-            <a href="{url 'login'}"><button type="button" class="btn btn-outline-primary me-2">Login</button></a>
-            <a href="{% url 'register' %}"><button type="button" class="btn btn-primary">Sign-up</button></a>
+               <div class="" >
+                    <button type="button" class="btn btn-outline-primary me-2">{{user.username}}</button>
+                    <a href="{% url 'logout' %}"><button type="button" class="btn btn-primary">Logout</button></a>
+                </div>
+            {% else %}
+                <div class="">
+                    <a href="{% url 'login' %}"><button type="button" class="btn btn-outline-primary me-2">Login</button></a>
+                    <a href="{% url 'register' %}"><button type="button" class="btn btn-primary">Sign-up</button></a>
+                </div>
+            {% endif %}
           </div>
         </header>
-      </div>
+    </div>
     <div class='ripple-background'>
         <div class='circle xxlarge shade1'></div>
         <div class='circle xlarge shade2'></div>
