@@ -1,3 +1,4 @@
+from logging import PlaceHolder
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -40,4 +41,39 @@ class Profile(models.Model):
     @classmethod
     def search_profile(cls, name):
         return cls.objects.filter(user__username__icontains=name).all()
+
+
+
+class Project(models.Model):
+    title=models.CharField(max_length=100,PlaceHolder="Title")
+    image = models.ImageField(upload_to ='projectimage')
+    description = models.CharField(max_length=300,blank=True,default="Description")
+    url=models.CharField(max_length=100,PlaceHolder="Project Url")
+    date_posted = models.DateTimeField(auto_now_add=True,blank=True)
+    user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='project')
+    
+
+    def __str__(self):
+        return f'{self.user} project'
+
+    class Meta:
+        ordering = ["-pk"]
+
+    def save_image(self):
+        self.save()
+
+    def delete_image(self):
+        self.delete()
+
+    def total_likes(self):
+        return self.likes.count()
+    
+    @classmethod
+    def get_profile_posts(cls,profile):
+        posts = Project.objects.filter(profile__pk= profile)
+        return posts
+    @classmethod
+    def update_post_caption(cls,id,caption):
+        update =cls.objects.filter(id=id).update(caption=caption)
+        return update
 
