@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 ">
+            
+            <div class="d-flex float-end" style="height: 400px;">
+                <div class="vr"></div>
+            </div>
+            {% if profile.ppic %}
+            <img src="{{profile.ppic.url}}" alt="ppic" width="300" height="300" class="rounded-circle float-end m-4 ">
+            {% endif %}
+            
+        </div> 
+        <div class="col-md-6">
+            <div class="container d-flex">
+                <p class="text-uppercase fw-bolder m-4">{{user.username}}</p> 
+                <a href="{% url 'update_profile' user.id %}" class="m-3"><button class="btn btn-outline-primary fs-6">EDIT PROFILE</button></a>
+            </div>
+
+            <div class="container d-flex m-4">
+                <p class="m-4">0 posts</p>
+                <p class="m-4">0 Followers</p>
+                <p class="m-4">0 Following</p>
+            </div>
+            <div class="container">
+                <p>{{user.first_name}} {{user.last_name}} </p>
+                <p>BIO:{{profile.bio}}</p>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<hr>
+<div class="container">
+    <div class="row">
+        {% for image in posts%}
+        <div class="col-md-4 p-4">
+            <img src="{{image.image.url}}" alt="" width="75%"  height="100%">
+        </div>
+        {% endfor %}
+        
+    </div>
+</div>
+
+
+{% endblock %}  
