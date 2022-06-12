@@ -18,4 +18,4 @@ class UserRegistrationForm(UserCreationForm):
 class UpdateUserProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('fname','lname','bio','ppic','phone')
+        fields = ('fname','lname','bio','ppic','phone','twitter','facebook','linkedin')

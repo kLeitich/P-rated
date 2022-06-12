@@ -3,14 +3,14 @@
 
 {% block content %}
 
-<div class="container">
+<div class="container text-white">
     <div class="row">
         <div class="col-md-6 ">
             
             <div class="d-flex float-end" style="height: 400px;">
                 <div class="vr"></div>
             </div>
-            {% if profile.ppic %}
+            {% if profile %}
             <img src="{{profile.ppic.url}}" alt="ppic" width="300" height="300" class="rounded-circle float-end m-4 ">
             {% endif %}
             
