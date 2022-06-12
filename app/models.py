@@ -8,9 +8,9 @@ from django.dispatch import receiver
 class Profile(models.Model):
     ppic=models.ImageField(upload_to ='ppic') 
     bio=models.TextField(max_length=600, default="Bio")
-    phone=models.TextField(max_length=600, default="Bio")
-    fname=models.CharField(max_length=30)
-    lname=models.CharField(max_length=30)
+    phone=models.TextField(max_length=20, default="Phone")
+    fname=models.CharField(max_length=30, default="First name")
+    lname=models.CharField(max_length=30, default="last name")
     user=models.OneToOneField(User, on_delete=models.CASCADE,primary_key=True)
 
     def __str__(self):

@@ -18,16 +18,28 @@
         <div class="col-md-6">
             <div class="container d-flex">
                 <p class="text-uppercase fw-bolder m-4">{{user.username}}</p> 
-                <a href="{% url 'update_profile' user.id %}" class="m-3"><button class="btn btn-outline-primary fs-6">EDIT PROFILE</button></a>
+                <a href="3" class="m-3"><button class="btn btn-outline-primary fs-6">EDIT PROFILE</button></a>
             </div>
 
-            <div class="container d-flex m-4">
-                <p class="m-4">0 posts</p>
-                <p class="m-4">0 Followers</p>
-                <p class="m-4">0 Following</p>
-            </div>
+            
             <div class="container">
-                <p>{{user.first_name}} {{user.last_name}} </p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="text-uppercase fw-bolder m-4">Name</p>    
+                        <p class="m-4">{{profile.fname}} {{profile.lname}}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="text-uppercase fw-bolder m-4">Contact</p>
+                        <p class="m-4">{{user.email}}</p>
+                        <p class="m-4">{{profile.phone}}</p>
+                        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                            <li class="ms-3"><a class="text-muted" href="#"><i class="bi bi-facebook"></i></a></li>
+                            <li class="ms-3"><a class="text-muted" href="#"><i class="bi bi-twitter"></i></a></li>
+                            <li class="ms-3"><a class="text-muted" href="#"><i class="bi bi-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                    
+                </div>
                 <p>BIO:{{profile.bio}}</p>
             </div>
             

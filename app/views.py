@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import login,authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from .models import Profile,User
 
 from app.forms import UserRegistrationForm
 
@@ -23,3 +24,10 @@ def register_user(request):
     context = {'form': form}
     return render(request, 'auth/register.html', context)
 
+
+def profile(request):
+    current_user = request.user
+    user = User.objects.get(id = current_user.id)
+    profile=Profile.filter_profile_by_id(user.id)
+    # posts = Image.objects.filter(user = user.id)
+    return render(request,'profile.html',{'profile':profile})

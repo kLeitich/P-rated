@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<h3>Update Profile</h3>
+<hr>
+
+<form method="POST" enctype="multipart/form-data" >
+    {% csrf_token %}
+
+    {% for field in form %}
+        <div>
+            <p>{{ field.label }}: <br> {{ field }}</p> 
+
+            {% for error in field.errors %}
+                <small style="color: red">{{ error }}</small>
+            {% endfor %}
+        </div>
+    {% endfor %}
+    <button type="submit" value="update">Update</button>
+</form>
+
+{% endblock %}
