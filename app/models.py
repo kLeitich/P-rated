@@ -1,4 +1,3 @@
-from logging import PlaceHolder
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -45,10 +44,11 @@ class Profile(models.Model):
 
 
 class Project(models.Model):
-    title=models.CharField(max_length=100,PlaceHolder="Title")
+    title=models.CharField(max_length=100,default="Title")
     image = models.ImageField(upload_to ='projectimage')
     description = models.CharField(max_length=300,blank=True,default="Description")
-    url=models.CharField(max_length=100,PlaceHolder="Project Url")
+    url=models.CharField(max_length=100,default="Project Url")
+    rate=models.ManyToManyField(User,related_name='likes',blank=True)
     date_posted = models.DateTimeField(auto_now_add=True,blank=True)
     user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='project')
     
@@ -59,21 +59,21 @@ class Project(models.Model):
     class Meta:
         ordering = ["-pk"]
 
-    def save_image(self):
+    def save_project(self):
         self.save()
 
     def delete_image(self):
         self.delete()
 
-    def total_likes(self):
-        return self.likes.count()
+    def rate(self):
+        return self.rate()
     
     @classmethod
     def get_profile_posts(cls,profile):
         posts = Project.objects.filter(profile__pk= profile)
         return posts
     @classmethod
-    def update_post_caption(cls,id,caption):
-        update =cls.objects.filter(id=id).update(caption=caption)
+    def update_post_description(cls,id,description):
+        update =cls.objects.filter(id=id).update(description=description)
         return update
 
