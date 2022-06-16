@@ -1,5 +1,18 @@
 {% extends 'base.html' %}
     
     {% block content %}  
-    <h1>Projects</h1>   
+   
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Projects</h3>
+                <hr>
+                <ul>
+                    {% for p in project %}
+                        <li><a href="#">{{p.title}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>  
     {% endblock %}

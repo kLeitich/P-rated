@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import login,authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Profile,User
+from .models import Profile,User,Project
 
 from app.forms import UpdateUserProfileForm, UploadProjectModelForm, UserRegistrationForm
 
@@ -48,7 +48,10 @@ def update_profile(request,id):
     return render(request, 'update_profile.html', {'form':form})
 
 def project(request):
-    return render(request,'project.html')
+    # current_user = request.user
+    project=Project.objects.all()
+    return render(request,'project.html',{'project':project})
+   
 
 # def project_detail(request,id):
 #     return render(request,'project_detail.html')
