@@ -1,11 +1,27 @@
 {% extends 'base.html' %}
     
-    {% block content %}
-    <div class="text-white container">
-
-    <h1 class="text-center">Welcome home</h1>
-    <p>This is the home page </p>
-
+{% block content %}
+    <div class="container-fluid">
+        <div class="container p-4">
+            <img src="static/background/octavian-dan-b21Ty33CqVs-unsplash.jpg" alt="cover" width="100%">
+        </div>
+        <div class="container">
+            <div class="row">
+                <h1>Latest projects</h1>
+                {% for p in project %}
+                <div class="col-md-4">  
+                    <div class="card" >
+                        <img src="{{p.image.url}}" class="card-img-top" alt="{{p.title}}" height="400em">
+                        <div class="card-body">
+                          <h5 class="card-title">{{p.title}}</h5>
+                          <p class="card-text">{{p.description}}</p>
+                          <a href="#" class="btn btn-outline-primary">Details</a>
+                        </div>
+                      </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
     
     {% endblock %}

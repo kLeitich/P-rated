@@ -8,7 +8,8 @@ from app.forms import UpdateUserProfileForm, UploadProjectModelForm, UserRegistr
 
 # Create your views here.
 def home(request):
-    return render(request,'index.html')
+    project=Project.objects.all()
+    return render(request,'index.html',{'project':project})
 
 def register_user(request):
     if request.method == 'POST':
