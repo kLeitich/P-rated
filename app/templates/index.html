@@ -2,7 +2,7 @@
     
 {% block content %}
     <div class="container-fluid">
-        <div class="container p-4">
+        <div class="container-fluid p-4">
             <img src="static/background/octavian-dan-b21Ty33CqVs-unsplash.jpg" alt="cover" width="100%">
         </div>
         <div class="container">
@@ -13,7 +13,7 @@
                     <div class="card" >
                         <img src="{{p.image.url}}" class="card-img-top" alt="{{p.title}}" height="400em">
                         <div class="card-body">
-                          <h5 class="card-title">{{p.title}}</h5>
+                          <h5 class="card-title text-dark">{{p.title}}</h5>
                           <p class="card-text">{{p.description}}</p>
                           <a href="#" class="btn btn-outline-primary">Details</a>
                         </div>
