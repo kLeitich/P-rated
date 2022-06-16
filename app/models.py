@@ -77,3 +77,35 @@ class Project(models.Model):
         update =cls.objects.filter(id=id).update(description=description)
         return update
 
+class Rate(models.Model):
+    design=models.IntegerField(default=0)
+    usability=models.IntegerField(default=0)
+    content=models.IntegerField(default=0)
+    profile=models.ForeignKey(Profile,on_delete=models.CASCADE,related_name='rate')
+    project=models.ForeignKey(Project,on_delete=models.CASCADE,related_name='rate')
+
+    def __str__(self):
+        return f'{self.profile} rate'
+
+    class Meta:
+        ordering = ["-pk"]
+
+    def save_rate(self):
+        self.save() 
+
+    def delete_rate(self):
+        self.delete()
+
+    def get_rate(self):
+        return self.rate()
+
+    @classmethod
+    def get_profile_rates(cls,profile):
+        rates = Rate.objects.filter(profile__pk= profile)
+        return rates
+
+    @classmethod
+    def get_project_rates(cls,project):
+        rates = Rate.objects.filter(project__pk= project)
+        return rates
+
