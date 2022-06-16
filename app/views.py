@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Profile,User
 
-from app.forms import UpdateUserProfileForm, UserRegistrationForm
+from app.forms import UpdateUserProfileForm, UploadProjectModelForm, UserRegistrationForm
 
 # Create your views here.
 def home(request):
@@ -49,3 +49,19 @@ def update_profile(request,id):
 
 def project(request):
     return render(request,'project.html')
+
+def project_detail(request,id):
+    return render(request,'project_detail.html')
+
+def project_update(request,id):
+    return render(request,'project_update.html')
+
+def project_new(request):
+    if request.method == "POST":
+        form = UploadProjectModelForm(request.POST,request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('project') 
+        else:
+            return render(request,'addproject.html',{'form':form})
+    return render(request,'addproject.html')
