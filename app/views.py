@@ -50,17 +50,20 @@ def update_profile(request,id):
 def project(request):
     return render(request,'project.html')
 
-def project_detail(request,id):
-    return render(request,'project_detail.html')
+# def project_detail(request,id):
+#     return render(request,'project_detail.html')
 
-def project_update(request,id):
-    return render(request,'project_update.html')
+# def project_update(request,id):
+#     return render(request,'project_update.html')
 
 def project_new(request):
+    current_user=request.user
     if request.method == "POST":
         form = UploadProjectModelForm(request.POST,request.FILES)
         if form.is_valid():
-            form.save()
+            new_project = form.save(commit=False)
+            new_project.user = current_user
+            new_project.save()
             messages.success(request, f'Your project has been uploaded!')   
             return redirect('project') 
         else:

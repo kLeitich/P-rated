@@ -13,9 +13,9 @@ urlpatterns=[
     path('profile',views.profile,name='profile'),
     path('update_profile/<int:id>',views.update_profile,name='update_profile'),
     path('project',views.project,name='project'),
-    path('project/<int:id>',views.project_detail,name='project_detail'),
-    path('project/<int:id>/update',views.project_update,name='project_update'),
-    path('project/<int:id>/delete',views.project_delete,name='project_delete'),
+    # path('project/<int:id>',views.project_detail,name='project_detail'),
+    # path('project/<int:id>/update',views.project_update,name='project_update'),
+    # path('project/<int:id>/delete',views.project_delete,name='project_delete'),
     path('project/new',views.project_new,name='project_new'),
 ]
 if settings.DEBUG:
