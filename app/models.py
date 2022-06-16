@@ -48,7 +48,7 @@ class Project(models.Model):
     image = models.ImageField(upload_to ='projectimage')
     description = models.CharField(max_length=300,blank=True,default="Description")
     url=models.CharField(max_length=100,default="Project Url")
-    rate=models.ManyToManyField(User,related_name='likes',blank=True)
+    rate=models.ManyToManyField(User,related_name='rate',blank=True)
     date_posted = models.DateTimeField(auto_now_add=True,blank=True)
     user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='project')
     
