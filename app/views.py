@@ -61,6 +61,7 @@ def project_new(request):
         form = UploadProjectModelForm(request.POST,request.FILES)
         if form.is_valid():
             form.save()
+            messages.success(request, f'Your project has been uploaded!')   
             return redirect('project') 
         else:
             return render(request,'addproject.html',{'form':form})
