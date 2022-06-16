@@ -46,3 +46,6 @@ def update_profile(request,id):
     else:        
         form = UpdateUserProfileForm(instance=profile)
     return render(request, 'update_profile.html', {'form':form})
+
+def project(request):
+    return render(request,'project.html')

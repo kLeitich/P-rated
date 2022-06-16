@@ -12,6 +12,7 @@ urlpatterns=[
     path('logout/', auth_views.LogoutView.as_view(template_name='auth/login.html'), name='logout'),
     path('profile',views.profile,name='profile'),
     path('update_profile/<int:id>',views.update_profile,name='update_profile'),
+    path('project',views.project,name='project'),
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
