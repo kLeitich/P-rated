@@ -52,9 +52,9 @@
 <hr>
 <div class="container">
     <div class="row">
-        {% for image in posts%}
+        {% for i in project %}
         <div class="col-md-4 p-4">
-            <img src="{{image.image.url}}" alt="" width="75%"  height="100%">
+            <a href="{{i.url}}"><img src="{{i.image.url}}" alt="" width="75%"  height="100%"></a>
         </div>
         {% endfor %}
         

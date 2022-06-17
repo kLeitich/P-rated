@@ -31,11 +31,12 @@ def register_user(request):
 
 @login_required(login_url='login') 
 def profile(request):
+    project=Project.objects.all()
     current_user = request.user
     user = User.objects.get(id = current_user.id)
     profile=Profile.filter_profile_by_id(user.id)
     # posts = Image.objects.filter(user = user.id)
-    return render(request,'profile.html',{'profile':profile})
+    return render(request,'profile.html',{'profile':profile,'project':project})
 
 @login_required(login_url='login') 
 def update_profile(request,id):
