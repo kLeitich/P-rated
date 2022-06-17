@@ -59,7 +59,6 @@ def project_detail(request,id):
     try:
         project = Project.objects.get(id=id)
         all = Rate.objects.filter(project=id)
-        # print(all)
     except Exception as error:
         raise Http404()
 
@@ -68,11 +67,6 @@ def project_detail(request,id):
         total+=i.design
         total+=i.content
         total+=i.usability
-
-    if total > 0:
-        average = round(total/3,1)
-    else:
-        average =0
 
     if request.method == 'POST':
         form = RatingModelForm(request.POST)
@@ -102,7 +96,6 @@ def project_detail(request,id):
         design_average = round(sum(design)/len(design),1)
         content_average = round(sum(content)/len(content),1)
 
-        total_average = round((usability_average+design_average+content_average)/3,1)
 
     else:
         usability_average = 0
@@ -116,8 +109,6 @@ def project_detail(request,id):
         'usability':usability_average,
         'design':design_average,
         'content':content_average,
-        'total_average':total_average,
-        'average':average,
     }
     return render(request, 'projectdetail.html',context)    
 
