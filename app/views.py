@@ -54,8 +54,10 @@ def project(request):
     return render(request,'project.html',{'project':project})
    
 
-def project_detail(request):
-    return render(request,'project_detail.html')
+def project_detail(request,id):
+    project=Project.objects.get(id=id)
+
+    return render(request,'project_detail.html',{'project':project})    
 
 
 def project_new(request):
