@@ -129,13 +129,13 @@ def project_new(request):
         else:
             return render(request,'addproject.html',{'form':form})
     return render(request,'addproject.html')
-@login_required(login_url='login') 
+
 class ProjectList(APIView):
     def get(self, request, format=None):
         all_project = Project.objects.all()
         serializers = ProjectSerializer(all_project, many=True)
         return Response(serializers.data)
-@login_required(login_url='login') 
+
 class ProfileList(APIView):
     def get(self, request, format=None):
         all_profile = Profile.objects.all()
