@@ -89,7 +89,7 @@ class Rate(models.Model):
 
     class Meta:
         ordering = ["-pk"]
-
+    
     def save_rate(self):
         self.save() 
 
