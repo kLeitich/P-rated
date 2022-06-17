@@ -111,13 +111,6 @@ def project_detail(request,id):
         content_average = 0
         total_average = 0
 
-
-    # ratearray = []
-    # for i in rates:
-    #     ratearray.append(i.profile_id)
-
-    # alreadyrated =ratearray
-
     context = {
         'form': form,
         'project': project,
@@ -126,7 +119,7 @@ def project_detail(request,id):
         'content':content_average,
         'total_average':total_average,
         'average':average,
-        'alreadyrated':alreadyrated,
+       
         'all':all,
 
 
