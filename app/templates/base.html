@@ -145,10 +145,10 @@ of Simple CSS Waves-->
           <div class="col-md-3 text-end">
             {% if user.is_authenticated %}
                                 <div class="" >
-                                  {% if user.is_authenticated %}
+                                  {% if user.profile.ppic %}
                                   <img src="{{ user.profile.ppic.url }}" alt="ppic" class="rounded-circle" width="40" height="40">
                                   {% else %}
-                                  <img src="https://unsplash.com/photos/K4mSJ7kc0As" alt="ppic" class="rounded-circle" width="40" height="40">
+                                  <img src="https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=717&q=80" alt="ppic" class="rounded-circle" width="40" height="40">
                                   {% endif %}
                                     <a href="{% url 'profile' %}"><button type="button" class="btn btn-primary">{{user.username}}</button></a>
                                     <a href="{% url 'logout' %}"><button type="button" class="btn btn-outline-primary me-2">Logout</button></a>
