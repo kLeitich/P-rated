@@ -10,6 +10,7 @@ from rest_framework.views import APIView
 from .serializer import ProjectSerializer,ProfileSerializer
 
 # Create your views here.
+@login_required(login_url='login') 
 def home(request):
     project=Project.objects.all()
     return render(request,'index.html',{'project':project})
@@ -28,7 +29,7 @@ def register_user(request):
     context = {'form': form}
     return render(request, 'auth/register.html', context)
 
-
+@login_required(login_url='login') 
 def profile(request):
     current_user = request.user
     user = User.objects.get(id = current_user.id)
@@ -36,7 +37,7 @@ def profile(request):
     # posts = Image.objects.filter(user = user.id)
     return render(request,'profile.html',{'profile':profile})
 
-
+@login_required(login_url='login') 
 def update_profile(request,id):
     user = User.objects.get(id=id)
     profile = Profile.objects.get(user = user)
@@ -50,13 +51,13 @@ def update_profile(request,id):
     else:        
         form = UpdateUserProfileForm(instance=profile)
     return render(request, 'update_profile.html', {'form':form})
-
+@login_required(login_url='login') 
 def project(request):
     # current_user = request.user
     project=Project.objects.all()
     return render(request,'project.html',{'project':project})
    
-
+@login_required(login_url='login') 
 def project_detail(request,id):
     try:
         project = Project.objects.get(id=id)
@@ -128,13 +129,13 @@ def project_new(request):
         else:
             return render(request,'addproject.html',{'form':form})
     return render(request,'addproject.html')
-
+@login_required(login_url='login') 
 class ProjectList(APIView):
     def get(self, request, format=None):
         all_project = Project.objects.all()
         serializers = ProjectSerializer(all_project, many=True)
         return Response(serializers.data)
-
+@login_required(login_url='login') 
 class ProfileList(APIView):
     def get(self, request, format=None):
         all_profile = Profile.objects.all()
