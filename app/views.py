@@ -119,10 +119,6 @@ def project_detail(request,id):
         'content':content_average,
         'total_average':total_average,
         'average':average,
-       
-        'all':all,
-
-
     }
     return render(request, 'projectdetail.html',context)    
 
