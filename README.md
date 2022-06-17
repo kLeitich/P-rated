@@ -2,7 +2,9 @@
 
 
 
-A Django website that someone can submit a 
+A Django website that someone can submit a project and user can rate the project.
+
+
 
 ## Getting Started
 
@@ -12,11 +14,11 @@ These instructions will get you a copy of the project up and running on your loc
 
 #### Cloning the repository:  
  ```bash 
-https://github.com/kLeitich/instagram_clone.git
+https://github.com/kLeitich/P-rated.git
 ```
 #### Navigate into the folder and install requirements  
  ```bash 
-cd instagram_clone && pip install -r requirements.txt 
+cd P-rated && pip install -r requirements.txt 
 ```
 ##### Install and activate Virtual  
  ```bash 
