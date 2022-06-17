@@ -4,8 +4,10 @@ from django.contrib.auth import login,authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Profile,User,Project,Rate
-
 from app.forms import RatingModelForm, UpdateUserProfileForm, UploadProjectModelForm, UserRegistrationForm
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import ProjectSerializer,ProfileSerializer
 
 # Create your views here.
 def home(request):
@@ -126,3 +128,15 @@ def project_new(request):
         else:
             return render(request,'addproject.html',{'form':form})
     return render(request,'addproject.html')
+
+class ProjectList(APIView):
+    def get(self, request, format=None):
+        all_project = Project.objects.all()
+        serializers = ProjectSerializer(all_project, many=True)
+        return Response(serializers.data)
+
+class ProfileList(APIView):
+    def get(self, request, format=None):
+        all_profile = Profile.objects.all()
+        serializers = ProfileSerializer(all_profile, many=True)
+        return Response(serializers.data)
