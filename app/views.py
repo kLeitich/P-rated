@@ -1,10 +1,11 @@
+from django.http import Http404
 from django.shortcuts import redirect, render
 from django.contrib.auth import login,authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Profile,User,Project
+from .models import Profile,User,Project,Rate
 
-from app.forms import UpdateUserProfileForm, UploadProjectModelForm, UserRegistrationForm
+from app.forms import RatingModelForm, UpdateUserProfileForm, UploadProjectModelForm, UserRegistrationForm
 
 # Create your views here.
 def home(request):
@@ -55,9 +56,80 @@ def project(request):
    
 
 def project_detail(request,id):
-    project=Project.objects.get(id=id)
+    try:
+        project = Project.objects.get(id=id)
+        all = Rate.objects.filter(project=id)
+        # print(all)
+    except Exception as error:
+        raise Http404()
 
-    return render(request,'project_detail.html',{'project':project})    
+    total = 0
+    for i in all:
+        total+=i.design
+        total+=i.content
+        total+=i.usability
+
+    if total > 0:
+        average = round(total/3,1)
+    else:
+        average =0
+
+    if request.method == 'POST':
+        form = RatingModelForm(request.POST)
+        if form.is_valid():
+            rate = form.save(commit=False)
+            rate.user = request.user
+            rate.project = id
+            rate.save()
+
+        return redirect('project_details',id)
+    else:
+        form = RatingModelForm()
+    
+    rates = Rate.objects.filter(project=id)
+    design=[]
+    usability = []
+    content =[]
+
+    for rate in rates:
+        design.append(rate.design)
+        usability.append(rate.usability)
+        content.append(rate.content)
+
+    if len(usability) > 0 and len(usability) <=10 or len(content) > 0 and len(content) <=10 or len(design) > 0 and len(design) <= 10:
+        usability_average = round(sum(usability)/len(usability),1)
+        design_average = round(sum(design)/len(design),1)
+        content_average = round(sum(content)/len(content),1)
+
+        total_average = round((usability_average+design_average+content_average)/3,1)
+
+    else:
+        usability_average = 0
+        design_average = 0
+        content_average = 0
+        total_average = 0
+
+
+    ratearray = []
+    for i in rates:
+        ratearray.append(i.user_id)
+
+    alreadyrated =ratearray
+
+    context = {
+        'form': form,
+        'project': project,
+        'usability':usability_average,
+        'design':design_average,
+        'content':content_average,
+        'total_average':total_average,
+        'average':average,
+        'alreadyrated':alreadyrated,
+        'all':all,
+
+
+    }
+    return render(request, 'projectdetail.html',context)    
 
 
 def project_new(request):

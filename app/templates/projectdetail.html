@@ -2,3 +2,28 @@
 
 
 {% block content %}
+
+<main id="details-page">
+    <div class="col-md-12" >
+        <div class="details-card">
+            
+            <div class="card-body" style="display: flex;">
+                <div class="col-md-5">
+                    <img src="{{project.image.url}}" class="img-fluid" alt="">
+                </div>
+               <div class="col-md-4" id="col-des" style=" color:white">
+                <h4>Title:{{project.title}}</h4>
+
+                <p>Content:{{project.context}}</p>
+                <i>Url:{{project.url}}</i>
+                
+                <p>Posted on {{project.date|date}} </p>
+               </div>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
