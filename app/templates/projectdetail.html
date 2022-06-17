@@ -3,27 +3,45 @@
 
 {% block content %}
 
-<main id="details-page">
-    <div class="col-md-12" >
+    <div class="container">
         <div class="details-card">
             
-            <div class="card-body" style="display: flex;">
-                <div class="col-md-5">
-                    <img src="{{project.image.url}}" class="img-fluid" alt="">
-                </div>
-               <div class="col-md-4" id="col-des" style=" color:white">
-                <h4>Title:{{project.title}}</h4>
-
-                <p>Content:{{project.context}}</p>
-                <i>Url:{{project.url}}</i>
+            <div class="card-body text-white">
                 
-                <p>Posted on {{project.date|date}} </p>
-               </div>
+                <img src="{{project.image.url}}" class="img-fluid" alt="">
+                
+               
+                <h4>Title:{{project.title}}</h4>
+                <i class="text-white">Url: {{project.url}}</i>
+                <p class="text-white">Descriptions: {{project.description}}</p>
+                
+                <p class="text-white">Posted on {{project.date_posted|date}} </p>
+                <h5 class="text-white">Rating:</h5>
+                <div class="rating d-flex justify-content-evenly p-4">
+                    <p><span class="badge rounded-pill text-bg-primary">Design <br> {{design}}</span></p>
+                    <p><span class="badge rounded-pill text-bg-success">Usability <br>{{usability}}</span></p>
+                    <p><span class="badge rounded-pill text-bg-info ">Content <br>{{content}}</span></p>
+                </div>
                 
                 
                 
             </div>
         </div>
+    </div>
+
+    <div>
+        <h1>add projects</h1>
+        <form method="POST" enctype="multipart/form-data" >
+        {% csrf_token %}
+        {% for field in form %}
+        <div>
+            <p>{{ field.label }}: <br> {{ field }}</p> 
+            {% for error in field.errors %}
+                <small style="color: red">{{ error }}</small>
+            {% endfor %}
+        </div>
+        {% endfor %}
+        <button type="submit" value="update">Rate</button>
     </div>
 
 {% endblock %}

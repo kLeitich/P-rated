@@ -78,11 +78,13 @@ def project_detail(request,id):
         form = RatingModelForm(request.POST)
         if form.is_valid():
             rate = form.save(commit=False)
-            rate.user = request.user
-            rate.project = id
+            rate.user=request.user
+            rate.profile_id=id
+            rate.project=project
+            rate.project_id=id
             rate.save()
 
-        return redirect('project_details',id)
+        return redirect('project_detail',id)
     else:
         form = RatingModelForm()
     
@@ -110,11 +112,11 @@ def project_detail(request,id):
         total_average = 0
 
 
-    ratearray = []
-    for i in rates:
-        ratearray.append(i.user_id)
+    # ratearray = []
+    # for i in rates:
+    #     ratearray.append(i.profile_id)
 
-    alreadyrated =ratearray
+    # alreadyrated =ratearray
 
     context = {
         'form': form,
