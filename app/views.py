@@ -78,8 +78,7 @@ def project_detail(request,id):
         form = RatingModelForm(request.POST)
         if form.is_valid():
             rate = form.save(commit=False)
-            rate.user=request.user
-            rate.profile_id=id
+            rate.profile_id=request.user.id
             rate.project=project
             rate.project_id=id
             rate.save()
