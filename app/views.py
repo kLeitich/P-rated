@@ -54,11 +54,9 @@ def project(request):
     return render(request,'project.html',{'project':project})
    
 
-# def project_detail(request,id):
-#     return render(request,'project_detail.html')
+def project_detail(request):
+    return render(request,'project_detail.html')
 
-# def project_update(request,id):
-#     return render(request,'project_update.html')
 
 def project_new(request):
     current_user=request.user
