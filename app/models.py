@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
@@ -78,9 +78,9 @@ class Project(models.Model):
         return update
 
 class Rate(models.Model):
-    design=models.IntegerField(default=0)
-    usability=models.IntegerField(default=0)
-    content=models.IntegerField(default=0)
+    design=models.IntegerField(default=0,validators=[MaxValueValidator(10),MinValueValidator(1)])
+    usability=models.IntegerField(default=0,validators=[MaxValueValidator(10),MinValueValidator(1)])
+    content=models.IntegerField(default=0,validators=[MaxValueValidator(10),MinValueValidator(1)])
     profile=models.ForeignKey(Profile,on_delete=models.CASCADE,related_name='rate')
     project=models.ForeignKey(Project,on_delete=models.CASCADE,related_name='rate')
 
